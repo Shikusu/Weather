@@ -28,7 +28,7 @@
 
             android:layout_height="wrap_content"
 
-            android:hint="Search city or coordinates…"
+            android:hint="@string/recherche_par_ville_ou_coordonn_es"
 
             app:hintTextColor="#99ffffff"
 
@@ -84,7 +84,7 @@
 
             android:layout_height="wrap_content"
 
-            android:text="Pinned Locations"
+            android:text="@string/localisations_epingl_es"
 
             android:textColor="#CCffffff"
 
@@ -100,9 +100,6 @@
 
             app:layout_constraintStart_toStartOf="parent" />
 
-
-
-        <!-- Pinned locations list -->
 
         <androidx.recyclerview.widget.RecyclerView
 

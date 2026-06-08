@@ -5,4 +5,6 @@
     <string name="explorer">Explorer</string>
     <string name="ma_m_teo">Ma méteo</string>
     <string name="localisation_actuelle">Localisation actuelle:</string>
+    <string name="recherche_par_ville_ou_coordonn_es">Recherche par ville ou coordonnées..</string>
+    <string name="localisations_epingl_es">Localisations epinglées</string>
 </resources>
