@@ -12,10 +12,12 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.CancellationTokenSource;
 
+import java.io.IOException;
+
 public class LocalisationUtility {
 
     public interface LocationCallback {
-        void onLocationReceived(double latitude, double longitude);
+        void onLocationReceived(double latitude, double longitude) throws IOException;
         void onLocationFailed(String reason);
     }
 
@@ -61,7 +63,11 @@ public class LocalisationUtility {
         ).addOnSuccessListener(location -> {
             if (locationCallback == null) return;
             if (location != null) {
-                locationCallback.onLocationReceived(location.getLatitude(), location.getLongitude());
+                try {
+                    locationCallback.onLocationReceived(location.getLatitude(), location.getLongitude());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             } else {
                 locationCallback.onLocationFailed("Could not fetch GPS location. Is location turned on?");
             }

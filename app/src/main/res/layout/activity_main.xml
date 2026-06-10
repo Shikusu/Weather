@@ -23,7 +23,7 @@
 
             android:layout_height="0dp"
 
-            android:background="@drawable/bg_gradient_sunny"
+            android:background="@drawable/bg_gradient_night"
 
             app:layout_constraintTop_toTopOf="parent"
 

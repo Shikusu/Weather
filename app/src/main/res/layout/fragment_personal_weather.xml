@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
+<FrameLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ProgressBar
+        android:id="@+id/loadingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+<androidx.core.widget.NestedScrollView
+    android:visibility="gone"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:id="@+id/personalLayout"
     android:overScrollMode="never">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,6 +27,7 @@
         android:paddingHorizontal="20dp"
         android:paddingTop="56dp"
         android:paddingBottom="24dp">
+
 
         <TextView
             android:id="@+id/tvLocationName"
@@ -32,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_regular"
-            android:text="Antananarivo, MG"
+            android:text="@string/placeholder"
             android:textColor="#CCffffff"
             android:textSize="13sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -45,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/inter_thin"
-            android:text="24°"
+            android:text="@string/placeholder"
             android:textColor="#FFFFFFFF"
             android:textSize="96sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,25 +72,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/inter_regular"
-            android:text="Partly Cloudy"
+            android:text="@string/placeholder"
             android:textColor="#CCffffff"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTemperature" />
 
-        <TextView
-            android:id="@+id/tvHighLow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/inter_regular"
-            android:text="H: 27°   L: 18°"
-            android:textColor="#CCffffff"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCondition" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardHourly"
@@ -87,17 +90,39 @@
             app:cardElevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvHighLow">
+            app:layout_constraintTop_toBottomOf="@id/tvCondition">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvHourly"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:paddingHorizontal="12dp"
-                android:paddingVertical="8dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardClothingAdvice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                app:cardBackgroundColor="#1AFFFFFF"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCondition">
+                    <ImageView
+                        android:id="@+id/ivAdviceIcon"
+                        android:layout_width="72dp"
+                        android:layout_height="72dp"
+                        android:scaleType="centerCrop"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <TextView
+                        android:id="@+id/tvAdviceText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="16dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="Un t-shirt et une tenue légère feront parfaitement l'affaire aujourd'hui."
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="14sp"
+                        android:lineSpacingExtra="4dp" />
+
+            </androidx.cardview.widget.CardView>
 
         </androidx.cardview.widget.CardView>
 
@@ -133,7 +158,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="💧 Humidity"
+                        android:text="@string/humidity"
                         android:textColor="#CCffffff"
                         android:textSize="12sp" />
 
@@ -143,7 +168,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/inter_medium"
-                        android:text="72%"
+                        android:text="@string/placeholder"
                         android:textColor="#FFFFFFFF"
                         android:textSize="28sp" />
                 </LinearLayout>
@@ -169,7 +194,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="☀️ UV Index"
+                        android:text="@string/uv"
                         android:textColor="#CCffffff"
                         android:textSize="12sp" />
 
@@ -179,7 +204,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/inter_medium"
-                        android:text="5"
+                        android:text="@string/placeholder"
                         android:textColor="#FFFFFFFF"
                         android:textSize="28sp" />
                 </LinearLayout>
@@ -205,7 +230,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="💨 Wind"
+                        android:text="@string/Vent"
                         android:textColor="#CCffffff"
                         android:textSize="12sp" />
 
@@ -215,7 +240,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/inter_medium"
-                        android:text="14 km/h"
+                        android:text="@string/placeholder"
                         android:textColor="#FFFFFFFF"
                         android:textSize="28sp" />
                 </LinearLayout>
@@ -241,7 +266,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🌡️ Feels Like"
+                        android:text="@string/feels_like"
                         android:textColor="#CCffffff"
                         android:textSize="12sp" />
 
@@ -251,7 +276,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/inter_medium"
-                        android:text="22°"
+                        android:text="@string/placeholder"
                         android:textColor="#FFFFFFFF"
                         android:textSize="28sp" />
                 </LinearLayout>
@@ -262,3 +287,4 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
+</FrameLayout>

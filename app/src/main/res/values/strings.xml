@@ -7,4 +7,9 @@
     <string name="localisation_actuelle">Localisation actuelle:</string>
     <string name="recherche_par_ville_ou_coordonn_es">Recherche par ville ou coordonnées..</string>
     <string name="localisations_epingl_es">Localisations epinglées</string>
+    <string name="placeholder" />
+    <string name="humidity">💧 Humidité</string>
+    <string name="uv">☀️ UV</string>
+    <string name="Vent">💨 Vent</string>
+    <string name="feels_like">🌡️ Ressentie</string>
 </resources>
