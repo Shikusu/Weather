@@ -26,8 +26,30 @@ public class WeatherCodeMapper {
         if (uvIndex <= 10) return "Très élevé";
         return "Extrême";
     }
+    public static int getClothingIcon(double temp, int weatherCode) {
+        boolean isHeavyRain = weatherCode >= 65;
+        boolean isRainy     = weatherCode >= 51;
 
-    private String getClothingAdvice(double temp, int weatherCode, double uvIndex) {
+        if (isHeavyRain) {
+            return R.drawable.heavy_rain;
+        }
+
+        if (isRainy) {
+            return R.drawable.rain_and_such;
+        }
+
+        if (temp >= 28) {
+            return R.drawable.spinning_sun;
+        } else if (temp >= 22) {
+            return R.drawable.cloudy_sun;
+        } else if (temp >= 16) {
+            return R.drawable.vest_moving;
+        } else {
+            return R.drawable.coat_moving;
+        }
+    }
+
+    public static String getClothingAdvice(double temp, int weatherCode, double uvIndex) {
         boolean isRainy = weatherCode >= 51;
 
         StringBuilder advice = new StringBuilder();
@@ -35,7 +57,7 @@ public class WeatherCodeMapper {
         if (temp >= 28) {
             advice.append("Il fait chaud ! Sortez les vêtements légers et n'oubliez pas de bien vous hydrater.");
         } else if (temp >= 22) {
-            advice.append("Un t-shirt et une tenue légère feront parfaitement l'affaire aujourd'hui.");
+            advice.append("Un t-shirt et une tenue légère feront parfaitement l'affaire.");
         } else if (temp >= 16) {
             advice.append("Le temps est doux, prenez une petite veste ou un pull léger au cas où.");
         } else if (temp >= 10) {
@@ -51,7 +73,7 @@ public class WeatherCodeMapper {
                 advice.append("\n☔ N'oubliez pas votre parapluie ou un bon imperméable.");
             }
             if (uvIndex >= 6) {
-                advice.append("\n☀️ Le soleil tape fort aujourd'hui, mettez de la crème solaire !");
+                advice.append("\n Le soleil tape fort aujourd'hui, mettez de la crème solaire !");
             }
         }
 

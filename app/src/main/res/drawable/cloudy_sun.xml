@@ -1,0 +1,79 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="64dp"
+            android:height="64dp"
+            android:viewportWidth="64"
+            android:viewportHeight="64">
+
+            <path
+                android:fillColor="#FFC107"
+                android:pathData="M32,19 A11,11 0 1,0 32,41 A11,11 0 1,0 32,19" />
+
+            <group
+                android:name="rays_group"
+                android:pivotX="32"
+                android:pivotY="32">
+
+                <path
+                    android:fillColor="#00000000"
+                    android:pathData="
+                        M32,6 L32,11
+                        M32,49 L32,54
+                        M8,30 L13,30
+                        M51,30 L56,30
+                        M14.1,12.1 L17.6,15.6
+                        M46.4,44.4 L49.9,47.9
+                        M49.9,12.1 L46.4,15.6
+                        M17.6,44.4 L14.1,47.9"
+                    android:strokeWidth="2"
+                    android:strokeColor="#FFC107"
+                    android:strokeLineCap="round" />
+            </group>
+
+            <path
+                android:name="cloud_path"
+                android:fillColor="#B0BEC5"
+                android:pathData="M42,36
+                        Q50,34 48,44
+                        Q60,42 58,54
+                        Q56,60 48,60
+                        L18,60
+                        Q10,60 10,52
+                        Q10,44 20,44
+                        Q18,34 28,34
+                        Q30,30 36,30
+                        Q44,28 42,36Z" />
+
+
+        </vector>
+    </aapt:attr>
+
+    <target android:name="rays_group">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:duration="8000"
+                android:interpolator="@android:anim/linear_interpolator"
+                android:propertyName="rotation"
+                android:repeatCount="infinite"
+                android:valueFrom="0.0"
+                android:valueTo="360.0"
+                android:valueType="floatType" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="cloud_path">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:duration="1500"
+                android:propertyName="fillAlpha"
+                android:repeatCount="infinite"
+                android:repeatMode="reverse"
+                android:valueFrom="0.8"
+                android:valueTo="0.95" />
+        </aapt:attr>
+    </target>
+
+</animated-vector>

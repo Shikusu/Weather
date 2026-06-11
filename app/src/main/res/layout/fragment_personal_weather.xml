@@ -80,18 +80,6 @@
             app:layout_constraintTop_toBottomOf="@id/tvTemperature" />
 
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardHourly"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            app:cardBackgroundColor="#1AFFFFFF"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="0dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCondition">
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardClothingAdvice"
                 android:layout_width="0dp"
@@ -103,12 +91,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvCondition">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    android:gravity="center_vertical">
+
                     <ImageView
                         android:id="@+id/ivAdviceIcon"
-                        android:layout_width="72dp"
-                        android:layout_height="72dp"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
                         android:scaleType="centerCrop"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@drawable/spinning_sun" />
 
                     <TextView
                         android:id="@+id/tvAdviceText"
@@ -117,14 +112,15 @@
                         android:layout_weight="1"
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/inter_regular"
-                        android:text="Un t-shirt et une tenue légère feront parfaitement l'affaire aujourd'hui."
+                        android:text="@string/placeholder"
                         android:textColor="#FFFFFFFF"
                         android:textSize="14sp"
                         android:lineSpacingExtra="4dp" />
 
+                </LinearLayout>
+
             </androidx.cardview.widget.CardView>
 
-        </androidx.cardview.widget.CardView>
 
         <GridLayout
             android:id="@+id/gridMetrics"
@@ -136,7 +132,7 @@
             android:useDefaultMargins="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardHourly">
+            app:layout_constraintTop_toBottomOf="@id/cardClothingAdvice">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardHumidity"

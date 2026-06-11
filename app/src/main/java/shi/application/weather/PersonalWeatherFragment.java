@@ -1,6 +1,8 @@
 package shi.application.weather;
 
 import android.Manifest;
+import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -11,11 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,16 +61,19 @@ public class PersonalWeatherFragment extends Fragment {
                 }
             });
 
-    TextView tvLocationSub, tvTemperature, tvHumidity, tvFeelsLike, tvWindSpeed, tvWeatherDesc, tvUvIndex;
+    TextView tvLocationSub, tvTemperature, tvHumidity, tvFeelsLike, tvWindSpeed, tvWeatherDesc, tvUvIndex,tvAdviceText;
     ProgressBar loadingBar;
     NestedScrollView rootLayout;
+    ImageView adviceIcon;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_personal_weather, container, false);
 
         Geocoder geocoder = new Geocoder(requireContext(), Locale.getDefault());
-        WeatherViewModel viewModel = new ViewModelProvider(this).get(WeatherViewModel.class);
+
+        adviceIcon = view.findViewById(R.id.ivAdviceIcon);
+        animateDrawable(adviceIcon);
 
         tvLocationSub = view.findViewById(R.id.tvLocationSub);
         tvTemperature = view.findViewById(R.id.tvTemperature);
@@ -75,8 +82,10 @@ public class PersonalWeatherFragment extends Fragment {
         tvWindSpeed = view.findViewById(R.id.tvWind);
         tvWeatherDesc = view.findViewById(R.id.tvCondition);
         tvUvIndex = view.findViewById(R.id.tvUvIndex);
+        tvAdviceText = view.findViewById(R.id.tvAdviceText);
         loadingBar = view.findViewById(R.id.loadingBar);
         rootLayout = view.findViewById(R.id.personalLayout);
+
 
         localisationUtility = new LocalisationUtility(requireContext());
         localisationUtility.setLocationCallback(new LocalisationUtility.LocationCallback() {
@@ -100,16 +109,13 @@ public class PersonalWeatherFragment extends Fragment {
                 } catch (IOException error) {
                     Log.e("ERROR", "Geocoder failed", error);
                 }
-                executor.execute(() -> {
-
-                    requireActivity().runOnUiThread(() -> {
-                        if (weatherViewModel.isCacheValid()) {
-                            updateUI(weatherViewModel.getWeatherData().getValue());
-                        } else {
-                            weatherViewModel.loadWeatherByCoords(latitude, longitude);
-                        }
-                    });
-                });
+                executor.execute(() -> requireActivity().runOnUiThread(() -> {
+                    if (weatherViewModel.isCacheValid()) {
+                        updateUI(weatherViewModel.getWeatherData().getValue());
+                    } else {
+                        weatherViewModel.loadWeatherByCoords(latitude, longitude);
+                    }
+                }));
             }
 
             @Override
@@ -138,7 +144,7 @@ public class PersonalWeatherFragment extends Fragment {
         weatherViewModel.isLoading().observe(getViewLifecycleOwner(), isLoading -> {
             if (isLoading) {
                 loadingBar.setVisibility(View.VISIBLE);
-                rootLayout.setVisibility(View.GONE); //
+                rootLayout.setVisibility(View.GONE);
             } else {
                 loadingBar.setVisibility(View.GONE);
                 rootLayout.setVisibility(View.VISIBLE);
@@ -149,8 +155,10 @@ public class PersonalWeatherFragment extends Fragment {
                 getViewLifecycleOwner(),
                 location -> tvLocationSub.setText(location)
         );
-        weatherViewModel.getErrorMessage().observe(getViewLifecycleOwner(), error ->
-                Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show()
+        weatherViewModel.getErrorMessage().observe(getViewLifecycleOwner(), error ->{
+                    Log.e("ERROR",error);
+                    Toast.makeText(getContext(), "Erreur de connexion", Toast.LENGTH_SHORT).show();
+                }
         );
     }
 
@@ -163,8 +171,21 @@ public class PersonalWeatherFragment extends Fragment {
             tvFeelsLike.setText(String.format(Locale.getDefault(), "%.1f°", data.current.feelsLike));
             tvWindSpeed.setText(String.format(Locale.getDefault(), "%.1f km/h", data.current.windSpeed));
             tvWeatherDesc.setText(WeatherCodeMapper.getDescription(data.current.weatherCode));
+            tvAdviceText.setText(WeatherCodeMapper.getClothingAdvice(data.current.temperature,data.current.weatherCode,data.current.uvIndex));
             tvUvIndex.setText(WeatherCodeMapper.getUVLabel(data.current.uvIndex));
+            adviceIcon.setImageResource(WeatherCodeMapper.getClothingIcon(data.current.temperature,data.current.weatherCode));
+            animateDrawable(adviceIcon);
         });
+    }
+
+    private void animateDrawable(ImageView icon){
+        Drawable drawable = icon.getDrawable();
+
+        if (drawable instanceof AnimatedVectorDrawable) {
+            ((AnimatedVectorDrawable) drawable).start();
+        } else if (drawable instanceof AnimatedVectorDrawableCompat) {
+            ((AnimatedVectorDrawableCompat) drawable).start();
+        }
     }
 
     @Override

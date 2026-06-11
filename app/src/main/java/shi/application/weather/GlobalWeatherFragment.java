@@ -1,64 +1,131 @@
 package shi.application.weather;
-
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
+import java.util.ArrayList;
+import java.util.List;
+
+import shi.application.weather.Model.GeocodingResponse;
+import shi.application.weather.Model.OpenMeteoResponse;
+import shi.application.weather.repository.WeatherRepository;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link GlobalWeatherFragment#newInstance} factory method to
+ * Use the {@link GlobalWeatherFragment #newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class GlobalWeatherFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private WeatherRepository weatherRepository;
+    private MaterialAutoCompleteTextView searchBar;
+    private ArrayAdapter<String> searchAdapter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private List<GeocodingResponse.GeoResult> currentSearchResults = new ArrayList<>();
 
-    public GlobalWeatherFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment GlobalWeatherFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static GlobalWeatherFragment newInstance(String param1, String param2) {
-        GlobalWeatherFragment fragment = new GlobalWeatherFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_global_weather, container, false);
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        weatherRepository = new WeatherRepository();
+        searchBar = view.findViewById(R.id.etSearch);
+
+        searchAdapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
+        searchBar.setAdapter(searchAdapter);
+
+        searchBar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String query = s.toString().trim();
+                if (query.length() > 2) {
+                    fetchCitySuggestions(query);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
+
+        searchBar.setOnItemClickListener((parent, view1, position, id) -> {
+            if (position < currentSearchResults.size()) {
+                GeocodingResponse.GeoResult selectedLocation = currentSearchResults.get(position);
+
+                searchBar.clearFocus();
+
+                fetchWeatherAndOpenPreview(selectedLocation);
+            }
+        });
+    }
+
+    private void fetchCitySuggestions(String query) {
+        weatherRepository.searchCity(query, new WeatherRepository.GeocodingCallback() {
+            @Override
+            public void onSuccess(GeocodingResponse data) {
+                if (data != null && data.results != null) {
+                    currentSearchResults = data.results;
+
+                    List<String> displayNames = new ArrayList<>();
+                    for (GeocodingResponse.GeoResult result : data.results) {
+                        String region = result.state != null ? result.state : result.country;
+                        displayNames.add(result.name + " (" + region + ")");
+                    }
+
+                    searchAdapter.clear();
+                    searchAdapter.addAll(displayNames);
+                    searchAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
+    }
+
+    private void fetchWeatherAndOpenPreview(GeocodingResponse.GeoResult location) {
+        weatherRepository.fetchWeatherByCoords(location.latitude, location.longitude, new WeatherRepository.WeatherCallback() {
+            @Override
+            public void onSuccess(OpenMeteoResponse weatherData) {
+                if (weatherData != null && weatherData.current != null) {
+
+                    double temp = weatherData.current.temperature;
+                    int weatherCode = weatherData.current.weatherCode;
+
+                    WeatherPreviewBottomSheet bottomSheet = new WeatherPreviewBottomSheet(
+                            location.name,
+                            temp,
+                            weatherCode
+                    );
+                    bottomSheet.show(getParentFragmentManager(), "WeatherPreview");
+                }
+            }
+
+            @Override
+            public void onFailure(String error) {
+                Toast.makeText(getContext(), "Impossible de charger la météo: " + error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

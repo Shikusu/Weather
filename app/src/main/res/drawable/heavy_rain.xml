@@ -1,0 +1,239 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="64dp"
+            android:height="64dp"
+            android:viewportWidth="64"
+            android:viewportHeight="64">
+
+            <group android:name="cloud_back">
+                <path
+                    android:fillColor="#455A64"
+                    android:pathData="M46,4
+                        Q58,2 56,14
+                        Q64,12 63,24
+                        Q62,30 54,30
+                        L18,30
+                        Q10,30 10,22
+                        Q10,14 20,14
+                        Q18,4 28,4
+                        Q30,0 38,0
+                        Q48,-2 46,4Z" />
+            </group>
+
+            <group android:name="cloud_front">
+                <path
+                    android:fillColor="#37474F"
+                    android:pathData="M38,10
+                        Q46,8 44,18
+                        Q54,16 52,26
+                        Q50,32 42,32
+                        L10,32
+                        Q2,32 2,24
+                        Q2,16 12,16
+                        Q10,8 20,8
+                        Q22,4 28,4
+                        Q38,2 38,10Z" />
+            </group>
+
+            <group android:name="hrain_a" android:translateY="0">
+                <path android:fillColor="#42A5F5"
+                    android:pathData="M10,34 Q9,39 10,44 Q11,39 10,34Z" />
+                <path android:fillColor="#42A5F5"
+                    android:pathData="M10,50 Q9,54 10,58 Q11,54 10,50Z" />
+            </group>
+
+            <group android:name="hrain_b" android:translateY="0">
+                <path android:fillColor="#42A5F5"
+                    android:pathData="M18,36 Q17,42 18,48 Q19,42 18,36Z" />
+                <path android:fillColor="#42A5F5"
+                    android:pathData="M18,52 Q17,56 18,60 Q19,56 18,52Z" />
+            </group>
+
+            <group android:name="hrain_c" android:translateY="0">
+                <path android:fillColor="#42A5F5"
+                    android:pathData="M26,34 Q25,40 26,46 Q27,40 26,34Z" />
+                <path android:fillColor="#42A5F5"
+                    android:pathData="M26,50 Q25,55 26,60 Q27,55 26,50Z" />
+            </group>
+
+            <group android:name="hrain_d" android:translateY="0">
+                <path android:fillColor="#42A5F5"
+                    android:pathData="M34,36 Q33,42 34,48 Q35,42 34,36Z" />
+                <path android:fillColor="#42A5F5"
+                    android:pathData="M34,52 Q33,57 34,62 Q35,57 34,52Z" />
+            </group>
+
+            <group android:name="hrain_e" android:translateY="0">
+                <path android:fillColor="#42A5F5"
+                    android:pathData="M42,34 Q41,40 42,46 Q43,40 42,34Z" />
+                <path android:fillColor="#42A5F5"
+                    android:pathData="M42,50 Q41,55 42,60 Q43,55 42,50Z" />
+            </group>
+
+            <group android:name="hrain_f" android:translateY="0">
+                <path android:fillColor="#42A5F5"
+                    android:pathData="M50,36 Q49,42 50,48 Q51,42 50,36Z" />
+                <path android:fillColor="#42A5F5"
+                    android:pathData="M50,52 Q49,57 50,62 Q51,57 50,52Z" />
+            </group>
+
+            <group
+                android:name="lightning"
+                android:alpha="0">
+                <path
+                    android:fillColor="#FFF176"
+                    android:pathData="M36,14 L30,30 L35,30 L28,48 L42,28 L36,28 Z" />
+            </group>
+
+        </vector>
+    </aapt:attr>
+
+    <target android:name="cloud_back">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="translateX"
+                android:valueFrom="-2"
+                android:valueTo="2"
+                android:duration="1800"
+                android:repeatMode="reverse"
+                android:repeatCount="infinite"
+                android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="cloud_front">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="translateX"
+                android:valueFrom="2"
+                android:valueTo="-2"
+                android:duration="1800"
+                android:repeatMode="reverse"
+                android:repeatCount="infinite"
+                android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="hrain_a">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="translateY"
+                android:valueFrom="0"
+                android:valueTo="16"
+                android:duration="450"
+                android:repeatMode="restart"
+                android:repeatCount="infinite"
+                android:interpolator="@android:anim/accelerate_interpolator" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="hrain_b">
+        <aapt:attr name="android:animation">
+            <set android:ordering="sequentially">
+                <objectAnimator android:propertyName="translateY"
+                    android:valueFrom="0" android:valueTo="0" android:duration="120" />
+                <objectAnimator
+                    android:propertyName="translateY"
+                    android:valueFrom="0"
+                    android:valueTo="16"
+                    android:duration="450"
+                    android:repeatMode="restart"
+                    android:repeatCount="infinite"
+                    android:interpolator="@android:anim/accelerate_interpolator" />
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="hrain_c">
+        <aapt:attr name="android:animation">
+            <set android:ordering="sequentially">
+                <objectAnimator android:propertyName="translateY"
+                    android:valueFrom="0" android:valueTo="0" android:duration="250" />
+                <objectAnimator
+                    android:propertyName="translateY"
+                    android:valueFrom="0"
+                    android:valueTo="16"
+                    android:duration="450"
+                    android:repeatMode="restart"
+                    android:repeatCount="infinite"
+                    android:interpolator="@android:anim/accelerate_interpolator" />
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="hrain_d">
+        <aapt:attr name="android:animation">
+            <set android:ordering="sequentially">
+                <objectAnimator android:propertyName="translateY"
+                    android:valueFrom="0" android:valueTo="0" android:duration="370" />
+                <objectAnimator
+                    android:propertyName="translateY"
+                    android:valueFrom="0"
+                    android:valueTo="16"
+                    android:duration="450"
+                    android:repeatMode="restart"
+                    android:repeatCount="infinite"
+                    android:interpolator="@android:anim/accelerate_interpolator" />
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="hrain_e">
+        <aapt:attr name="android:animation">
+            <set android:ordering="sequentially">
+                <objectAnimator android:propertyName="translateY"
+                    android:valueFrom="0" android:valueTo="0" android:duration="60" />
+                <objectAnimator
+                    android:propertyName="translateY"
+                    android:valueFrom="0"
+                    android:valueTo="16"
+                    android:duration="450"
+                    android:repeatMode="restart"
+                    android:repeatCount="infinite"
+                    android:interpolator="@android:anim/accelerate_interpolator" />
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="hrain_f">
+        <aapt:attr name="android:animation">
+            <set android:ordering="sequentially">
+                <objectAnimator android:propertyName="translateY"
+                    android:valueFrom="0" android:valueTo="0" android:duration="300" />
+                <objectAnimator
+                    android:propertyName="translateY"
+                    android:valueFrom="0"
+                    android:valueTo="16"
+                    android:duration="450"
+                    android:repeatMode="restart"
+                    android:repeatCount="infinite"
+                    android:interpolator="@android:anim/accelerate_interpolator" />
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="lightning">
+        <aapt:attr name="android:animation">
+            <set android:ordering="sequentially">
+                <objectAnimator android:propertyName="alpha"
+                    android:valueFrom="0" android:valueTo="0" android:duration="2800" />
+                <objectAnimator android:propertyName="alpha"
+                    android:valueFrom="0" android:valueTo="1" android:duration="80" />
+                <objectAnimator android:propertyName="alpha"
+                    android:valueFrom="1" android:valueTo="0" android:duration="80" />
+                <objectAnimator android:propertyName="alpha"
+                    android:valueFrom="0" android:valueTo="0" android:duration="120" />
+                <objectAnimator android:propertyName="alpha"
+                    android:valueFrom="0" android:valueTo="0.8" android:duration="60" />
+                <objectAnimator android:propertyName="alpha"
+                    android:valueFrom="0.8" android:valueTo="0"
+                    android:duration="300"
+                    android:repeatMode="restart"
+                    android:repeatCount="infinite" />
+            </set>
+        </aapt:attr>
+    </target>
+
+</animated-vector>

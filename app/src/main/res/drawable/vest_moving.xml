@@ -1,0 +1,104 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="64dp"
+            android:height="64dp"
+            android:viewportWidth="64"
+            android:viewportHeight="64">
+
+            <group android:name="vest_left" android:pivotX="32" android:pivotY="32">
+                <path android:fillColor="#3F51B5"
+                    android:pathData="M8,28 L20,22 L24,34 L20,58 L8,58 Z" />
+                <path android:fillColor="#00BCD4"
+                    android:pathData="M8,28 L20,22 L20,27 L8,33 Z" />
+            </group>
+
+            <group android:name="vest_right" android:pivotX="32" android:pivotY="32">
+                <path android:fillColor="#3F51B5"
+                    android:pathData="M56,28 L44,22 L40,34 L44,58 L56,58 Z" />
+                <path android:fillColor="#00BCD4"
+                    android:pathData="M56,28 L44,22 L44,27 L56,33 Z" />
+            </group>
+
+            <group android:name="shoulder_left" android:pivotX="22" android:pivotY="12">
+                <path android:fillColor="#3F51B5"
+                    android:pathData="M20,22 L32,18 L32,30 L24,34 Z" />
+            </group>
+
+            <group android:name="shoulder_right" android:pivotX="42" android:pivotY="12">
+                <path android:fillColor="#3F51B5"
+                    android:pathData="M44,22 L32,18 L32,30 L40,34 Z" />
+            </group>
+
+            <path android:fillColor="#3F51B5"
+                android:pathData="M26,18 Q32,12 38,18 Q35,22 32,22 Q29,22 26,18 Z" />
+
+            <path android:fillColor="#3F51B5"
+                android:pathData="M20,22 L24,34 L24,58 L40,58 L40,34 L44,22 L32,18 Z" />
+
+            <path android:fillColor="#2196F3"
+                android:pathData="M22,54 L42,54 L42,58 L22,58 Z" />
+
+            <group android:name="wind_lines">
+                <path android:strokeColor="#90CAF9" android:strokeWidth="1.5"
+                    android:strokeLineCap="round" android:fillColor="#00000000"
+                    android:pathData="M2,32 Q6,30 10,32 Q14,34 18,32" />
+                <path android:strokeColor="#90CAF9" android:strokeWidth="1.5"
+                    android:strokeLineCap="round" android:fillColor="#00000000"
+                    android:pathData="M2,38 Q5,36 8,38" />
+            </group>
+
+            <group android:name="wind_lines_right">
+                <path android:strokeColor="#90CAF9" android:strokeWidth="1.5"
+                    android:strokeLineCap="round" android:fillColor="#00000000"
+                    android:pathData="M46,32 Q50,30 54,32 Q58,34 62,32" />
+                <path android:strokeColor="#90CAF9" android:strokeWidth="1.5"
+                    android:strokeLineCap="round" android:fillColor="#00000000"
+                    android:pathData="M56,38 Q59,36 62,38" />
+            </group>
+        </vector>
+    </aapt:attr>
+
+    <target android:name="shoulder_left">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation"
+                android:valueFrom="-6.0" android:valueTo="6.0"
+                android:valueType="floatType"
+                android:duration="800" android:repeatMode="reverse" android:repeatCount="infinite"
+                android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="shoulder_right">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="rotation"
+                android:valueFrom="6.0" android:valueTo="-6.0"
+                android:valueType="floatType"
+                android:duration="800" android:startOffset="200"
+                android:repeatMode="reverse" android:repeatCount="infinite"
+                android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="wind_lines">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="translationX"
+                android:valueFrom="-4.0" android:valueTo="4.0"
+                android:valueType="floatType"
+                android:duration="1200" android:repeatMode="reverse" android:repeatCount="infinite"
+                android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="wind_lines_right">
+        <aapt:attr name="android:animation">
+            <objectAnimator android:propertyName="translationX"
+                android:valueFrom="4.0" android:valueTo="-4.0"
+                android:valueType="floatType"
+                android:duration="1200" android:repeatMode="reverse" android:repeatCount="infinite"
+                android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+        </aapt:attr>
+    </target>
+
+</animated-vector>

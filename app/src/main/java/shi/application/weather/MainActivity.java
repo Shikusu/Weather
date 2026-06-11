@@ -1,21 +1,14 @@
 package shi.application.weather;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import java.util.Calendar;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import shi.application.weather.utility.ActivityManipulation;
-import shi.application.weather.utility.LocalisationUtility;
 
 public class MainActivity extends AppCompatActivity {
 

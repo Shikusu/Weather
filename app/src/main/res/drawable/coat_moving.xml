@@ -1,0 +1,191 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="64dp"
+            android:height="64dp"
+            android:viewportWidth="64"
+            android:viewportHeight="64">
+
+            <group
+                android:name="coat_left"
+                android:pivotX="20"
+                android:pivotY="35">
+                <path
+                    android:fillColor="#455A64"
+                    android:pathData="M8,26 L22,20 L26,36 L24,62 L8,62 Z" />
+                <path
+                    android:fillColor="#37474F"
+                    android:pathData="M22,20 L28,18 L26,36 Z" />
+                <path
+                    android:fillColor="#ECEFF1"
+                    android:pathData="M18,42 A2,2 0 1,1 18.01,42 Z" />
+                <path
+                    android:fillColor="#ECEFF1"
+                    android:pathData="M18,50 A2,2 0 1,1 18.01,50 Z" />
+            </group>
+
+            <group
+                android:name="coat_right"
+                android:pivotX="44"
+                android:pivotY="35">
+                <path
+                    android:fillColor="#455A64"
+                    android:pathData="M56,26 L42,20 L38,36 L40,62 L56,62 Z" />
+                <path
+                    android:fillColor="#37474F"
+                    android:pathData="M42,20 L36,18 L38,36 Z" />
+            </group>
+
+            <group
+                android:name="sleeve_left"
+                android:pivotX="10"
+                android:pivotY="28">
+                <path
+                    android:fillColor="#546E7A"
+                    android:pathData="M8,26 L22,20 L20,32 L6,38 Z" />
+                <path
+                    android:fillColor="#37474F"
+                    android:pathData="M6,34 L20,28 L20,32 L6,38 Z" />
+            </group>
+
+            <group
+                android:name="sleeve_right"
+                android:pivotX="54"
+                android:pivotY="28">
+                <path
+                    android:fillColor="#546E7A"
+                    android:pathData="M56,26 L42,20 L44,32 L58,38 Z" />
+                <path
+                    android:fillColor="#37474F"
+                    android:pathData="M58,34 L44,28 L44,32 L58,38 Z" />
+            </group>
+
+            <group
+                android:name="shoulder_left"
+                android:pivotX="22"
+                android:pivotY="14">
+                <path
+                    android:fillColor="#37474F"
+                    android:pathData="M22,20 L32,16 L32,28 L26,36 Z" />
+            </group>
+
+            <group
+                android:name="shoulder_right"
+                android:pivotX="42"
+                android:pivotY="14">
+                <path
+                    android:fillColor="#37474F"
+                    android:pathData="M42,20 L32,16 L32,28 L38,36 Z" />
+            </group>
+
+            <path
+                android:fillColor="#37474F"
+                android:pathData="M24,18 Q32,10 40,18 L36,24 Q32,20 28,24 Z" />
+
+            <path
+                android:fillColor="#455A64"
+                android:pathData="M26,36 L28,62 L36,62 L38,36 L32,28 Z" />
+
+            <group android:name="snow_left">
+                <path
+                    android:strokeColor="#CFD8DC"
+                    android:strokeWidth="1.2"
+                    android:strokeLineCap="round"
+                    android:fillColor="#00000000"
+                    android:pathData="M4,20 L4,26 M1,23 L7,23 M2,21 L6,25 M2,25 L6,21" />
+            </group>
+
+            <group android:name="snow_right">
+                <path
+                    android:strokeColor="#CFD8DC"
+                    android:strokeWidth="1.2"
+                    android:strokeLineCap="round"
+                    android:fillColor="#00000000"
+                    android:pathData="M58,20 L58,26 M55,23 L61,23 M56,21 L60,25 M56,25 L60,21" />
+            </group>
+
+        </vector>
+    </aapt:attr>
+
+    <target android:name="shoulder_left">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="rotation"
+                android:valueFrom="-5"
+                android:valueTo="5"
+                android:duration="900"
+                android:repeatMode="reverse"
+                android:repeatCount="infinite"
+                android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+        </aapt:attr>
+    </target>
+
+    <target android:name="shoulder_right">
+        <aapt:attr name="android:animation">
+            <set android:ordering="sequentially">
+                <objectAnimator
+                    android:propertyName="rotation"
+                    android:valueFrom="0"
+                    android:valueTo="0"
+                    android:duration="200" />
+                <objectAnimator
+                    android:propertyName="rotation"
+                    android:valueFrom="5"
+                    android:valueTo="-5"
+                    android:duration="900"
+                    android:repeatMode="reverse"
+                    android:repeatCount="infinite"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="snow_left">
+        <aapt:attr name="android:animation">
+            <set android:ordering="together">
+                <objectAnimator
+                    android:propertyName="translationY"
+                    android:valueFrom="-3"
+                    android:valueTo="3"
+                    android:duration="1400"
+                    android:repeatMode="reverse"
+                    android:repeatCount="infinite"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+                <objectAnimator
+                    android:propertyName="translationX"
+                    android:valueFrom="-2"
+                    android:valueTo="2"
+                    android:duration="1000"
+                    android:repeatMode="reverse"
+                    android:repeatCount="infinite"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+            </set>
+        </aapt:attr>
+    </target>
+
+    <target android:name="snow_right">
+        <aapt:attr name="android:animation">
+            <set android:ordering="together">
+                <objectAnimator
+                    android:propertyName="translationY"
+                    android:valueFrom="3"
+                    android:valueTo="-3"
+                    android:duration="1400"
+                    android:repeatMode="reverse"
+                    android:repeatCount="infinite"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+                <objectAnimator
+                    android:propertyName="translationX"
+                    android:valueFrom="2"
+                    android:valueTo="-2"
+                    android:duration="1000"
+                    android:repeatMode="reverse"
+                    android:repeatCount="infinite"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator" />
+            </set>
+        </aapt:attr>
+    </target>
+
+</animated-vector>
